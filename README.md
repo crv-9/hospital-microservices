@@ -51,6 +51,15 @@ The system is composed of the following microservices:
   - `GET /invoices`: Retrieve all invoices.
   - `PUT /invoices/{id}/paid`: Mark an invoice as paid.
 
+### 5. Administration Service (Port: 9000)
+- Provides a central interface for managing patient admissions and tracking invoices. It integrates the functionalities of the other microservices, allowing hospital staff to admit patients, view their status through diagnosis and treatment, and manage financial records.
+- **Endpoints**:
+  - `POST /admissions`: Admit a new patient.
+  - `GET /patients`: Retrieve a list of all admitted patients.
+  - `GET /invoices`: View and manage invoices.
+  
+This service could be extended with a graphical user interface (GUI) in the future for easier management.
+
 
 ## Topics Covered
 Each web application demonstrates an essential backend concept:
