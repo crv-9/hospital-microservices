@@ -22,6 +22,35 @@ The system is composed of the following microservices:
 
 5. **Administration**: Offers a user interface for admitting patients and allows accountants to manage patient invoices.
 
+## Microservices Details
+### 1. Admission Service (Port: 9001)
+- Assigns UUIDs to patients upon admission.
+- Forwards admitted patients to the Diagnoses service.
+- **Endpoints**:
+  - `POST /patients`: Admit a patient and assign a UUID.
+  - `GET /uuids`: Retrieve all cached patient names and UUIDs.
+  - `GET /uuids/{patientName}`: Retrieve a specific UUID.
+
+### 2. Diagnoses Service (Port: 9002)
+- Diagnoses patients based on symptoms.
+- Forwards diagnosed patients to the Treatments service.
+- **Endpoints**:
+  - `POST /patients`: Diagnose a patient.
+
+### 3. Treatments Service (Port: 9003)
+- Assigns treatments and saves them in a NoSQL database.
+- Forwards treated patients to the Accountancy service.
+- **Endpoints**:
+  - `POST /patients`: Provide treatment.
+  - `GET /treatments`: Retrieve all treatments.
+
+### 4. Accountancy Service (Port: 9004)
+- Generates and manages invoices for treated patients.
+- **Endpoints**:
+  - `POST /patients`: Generate invoice.
+  - `GET /invoices`: Retrieve all invoices.
+  - `PUT /invoices/{id}/paid`: Mark an invoice as paid.
+
 
 ## Topics Covered
 Each web application demonstrates an essential backend concept:
@@ -32,4 +61,34 @@ Each web application demonstrates an essential backend concept:
 - **NoSQL Databases**
 - **SQL Databases**
 - **Security**
+
+## Prerequisites & Setup
+- **JDK 17++** (Java Development Kit)
+- **Docker** (for running MySQL and MongoDB databases)
+- **Maven** (for dependency management and project building)
+- **Spring Boot**
+
+#### Docker Setup for MySQL and MongoDB
+
+Ensure that Docker is installed on your system. You can use Docker containers to run MySQL and MongoDB databases for this project.
+
+##### 1. MySQL (for Accountancy Service)
+Run the following command to set up MySQL:
+
+```bash docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql:5.7```
+This command pulls and runs the MySQL container, exposing it on port 3306 with the root password set to root.
+
+##### 2. MongoDB (for Treatments Service)
+Run the following commands to set up MongoDB and a UI for easy database interaction:
+Create a Docker network for MongoDB and its UI
+```docker network create mongo```
+
+Run the MongoDB container
+```docker run -d -p 27017:27017 --network mongo --name mongo mongo```
+
+Run the MongoDB-Express UI container
+```docker run -d -p 8081:8081 --network mongo --name mongoui mongo-express```
+
+
+MongoDB will be available at ```localhost:27017```, and the UI will be accessible at ```http://localhost:8081```
 
