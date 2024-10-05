@@ -1,0 +1,17 @@
+Install MongoDB & MongoExpress(UI) with Docker
+
+-- Create a Docker network so the mongo ui can reach the mongo db
+docker network create mongo
+-- Run the mongo db Docker container for the first time
+docker run -d -p 27017:27017 --network mongo --name mongo mongo
+-- Run the mongo ui Docker container for the first time
+docker run -d -p 8081:8081 --network mongo --name mongoui mongo-express
+-- Use the browser to see the contents of the mongo db with the mongo ui
+http://localhost:8081
+-- Run the mongo db and mongo ui together after having run them once
+docker start mongo mongoui
+
+
+for http://localhost:8081/
+username: admin
+password: pass

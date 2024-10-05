@@ -1,7 +1,7 @@
 package crv.hospital.admissions;
 
 
-import crv.hospital.admissions.clients.DiagnosesClient;
+import crv.hospital.admissions.communication.clients.DiagnosesClient;
 import crv.hospital.admissions.logic.Admission;
 import crv.hospital.admissions.model.Patient;
 import crv.hospital.admissions.model.UUIDProvider;

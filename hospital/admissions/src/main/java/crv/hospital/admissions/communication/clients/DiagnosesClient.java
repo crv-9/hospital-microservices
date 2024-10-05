@@ -1,4 +1,4 @@
-package crv.hospital.admissions.clients;
+package crv.hospital.admissions.communication.clients;
 
 
 import crv.hospital.admissions.model.Patient;

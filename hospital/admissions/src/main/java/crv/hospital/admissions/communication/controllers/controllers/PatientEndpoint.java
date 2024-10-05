@@ -1,4 +1,4 @@
-package crv.hospital.admissions.controllers;
+package crv.hospital.admissions.communication.controllers.controllers;
 
 
 import crv.hospital.admissions.logic.Admission;

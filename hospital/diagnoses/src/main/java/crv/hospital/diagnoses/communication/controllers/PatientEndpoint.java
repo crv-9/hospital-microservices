@@ -1,4 +1,4 @@
-package crv.hospital.diagnoses.endpoints;
+package crv.hospital.diagnoses.communication.controllers;
 
 
 import crv.hospital.diagnoses.logic.DiagnosisRoom;

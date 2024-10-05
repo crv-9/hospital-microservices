@@ -1,7 +1,7 @@
 package crv.hospital.admissions.logic;
 
 
-import crv.hospital.admissions.clients.DiagnosesClient;
+import crv.hospital.admissions.communication.clients.DiagnosesClient;
 import crv.hospital.admissions.model.Patient;
 import crv.hospital.admissions.model.UUIDProvider;
 import org.springframework.stereotype.Service;
