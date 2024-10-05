@@ -1,7 +1,7 @@
 # Hospital Microservices - Backend Exercise Series
 
 ## Overview
-This series of web applications is a decentralized system for the simplified management of patients within a hospital. The decentralized system consists of several web applications that communicate between each other in order to accomplish the main goal.
+This series of web applications is a decentralized system for the simplified management of patients within a hospital. Built using Java Spring Boot with mySQL/MongoDB databases and Spring Security for authentication and authorization. The apps communicate with each other, passing patient data through each stage of their care journey. 
 
 <img width="842" alt="Screenshot 2024-10-03 at 21 47 00" src="https://github.com/user-attachments/assets/b903f0e9-2309-4d78-80d1-8319d0c24f84">
 
@@ -70,6 +70,13 @@ Each web application demonstrates an essential backend concept:
 - **NoSQL Databases**
 - **SQL Databases**
 - **Security**
+
+## Technologies
+- **Java Spring Boot**
+- **MySQL/MongoDB**
+- **Spring Security**
+- **JUnit and Mockito tests**
+
 
 ## Prerequisites & Setup
 - **JDK 17++** (Java Development Kit)
