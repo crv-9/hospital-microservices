@@ -1,14 +1,11 @@
-package io.everyonecodes.w1springbeans.drhouseadmission;
+package crv.hospital.admissions;
 
-import io.everyonecodes.w1springbeans.drhouseadmission.model.Patient;
-import io.everyonecodes.w1springbeans.drhouseadmission.model.UUIDProvider;
+
+import crv.hospital.admissions.model.Patient;
+import crv.hospital.admissions.model.UUIDProvider;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 @SpringBootTest
 public class UUIDProviderTest {

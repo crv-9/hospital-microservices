@@ -1,4 +1,4 @@
-package io.everyonecodes.w1springbeans.drhouseadmission.config;
+package crv.hospital.admissions.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

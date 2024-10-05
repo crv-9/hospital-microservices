@@ -1,23 +1,61 @@
-package io.everyonecodes.w1springbeans.drhouseadmission;
+package crv.hospital.admissions;
 
-import io.everyonecodes.w1springbeans.drhouseadmission.model.Admission;
-import io.everyonecodes.w1springbeans.drhouseadmission.model.Patient;
+
+import crv.hospital.admissions.clients.DiagnosesClient;
+import crv.hospital.admissions.logic.Admission;
+import crv.hospital.admissions.model.Patient;
+import crv.hospital.admissions.model.UUIDProvider;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class AdmissionTest {
 
-    @Autowired
-    Admission admission;
+
+    @Mock
+    private UUIDProvider uuidProvider;
+
+    @Mock
+    private DiagnosesClient diagnosesClient;
+
+    @InjectMocks
+    private Admission admission;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
-    public void testAdmission() {
-        Patient result = admission.admit(new Patient("carlos"));
+    void testAdmitPatient() {
+        // Arrange
+        Patient inputPatient = new Patient(null, "John Doe", "fever");
+        Patient expectedPatient = new Patient("some-uuid", "John Doe", "fever");
 
-        System.out.println(result.getName());
-        System.out.println(result.getUuid());
+        when(uuidProvider.provideUUID(inputPatient)).thenReturn("some-uuid");
+        when(admission.admit(inputPatient)).thenReturn(expectedPatient);
+
+        // Act
+        Patient admittedPatient = admission.admit(inputPatient);
+
+
+
+        // Assert
+        assertNotNull(admittedPatient);
+        assertEquals(expectedPatient.getUuid(), admittedPatient.getUuid());
+        assertEquals(expectedPatient.getName(), admittedPatient.getName());
+        assertEquals(expectedPatient.getSymptoms(), admittedPatient.getSymptoms());
+
+        verify(diagnosesClient, times(1)).send(inputPatient);
+        verify(uuidProvider, times(1)).provideUUID(inputPatient);
     }
 }

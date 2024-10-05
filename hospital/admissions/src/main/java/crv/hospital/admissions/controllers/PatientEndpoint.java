@@ -1,7 +1,8 @@
-package io.everyonecodes.w1springbeans.drhouseadmission.controllers;
+package crv.hospital.admissions.controllers;
 
-import io.everyonecodes.w1springbeans.drhouseadmission.model.Admission;
-import io.everyonecodes.w1springbeans.drhouseadmission.model.Patient;
+
+import crv.hospital.admissions.logic.Admission;
+import crv.hospital.admissions.model.Patient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

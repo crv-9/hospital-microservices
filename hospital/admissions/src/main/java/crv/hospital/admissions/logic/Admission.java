@@ -1,7 +1,9 @@
-package io.everyonecodes.w1springbeans.drhouseadmission.model;
+package crv.hospital.admissions.logic;
 
-import io.everyonecodes.w1springbeans.drhouseadmission.clients.DiagnosesClient;
-import org.springframework.context.annotation.Bean;
+
+import crv.hospital.admissions.clients.DiagnosesClient;
+import crv.hospital.admissions.model.Patient;
+import crv.hospital.admissions.model.UUIDProvider;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,10 +17,11 @@ public class Admission {
         this.diagnosesClient = diagnosesClient;
     }
 
-    // most likely I don't have to create a new patient?
+
     public Patient admit(Patient patient){
-        diagnosesClient.send(patient);
-        return new Patient(uuidProvider.provideUUID(patient), patient.getName());
+        patient.setUuid(uuidProvider.provideUUID(patient));
+        diagnosesClient.send(patient); // sending patient to diagnoses web client
+        return patient;
     }
 
 }

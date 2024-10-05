@@ -1,8 +1,9 @@
-package io.everyonecodes.w1springbeans.drhouseadmission.model;
+package crv.hospital.admissions.model;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class UUIDProvider {
         this.cache = cache;
     }
 
-    // instructions not clear on what to return, the String or Patient
+
     // TODO look into this method later to make it shorter
     public String provideUUID(Patient patient){
 
@@ -42,14 +43,8 @@ public class UUIDProvider {
         return cache;
     }
 
-    // for this specific case just returning null and not an Optional<String>
-    public String findUUID(String name){
-        return cache.getOrDefault(name, null);
+    public Optional<String> findUUID(String name){
+        return Optional.ofNullable(cache.get(name));
     }
-
-
-
-
-
 
 }

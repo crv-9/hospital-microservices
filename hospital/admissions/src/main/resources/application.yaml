@@ -1,2 +1,4 @@
 server:
   port: 9001
+hospital:
+  diagnoses-url: "http://localhost:9002/patients"

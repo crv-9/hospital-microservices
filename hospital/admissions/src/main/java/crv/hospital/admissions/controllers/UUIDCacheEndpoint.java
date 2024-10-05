@@ -1,6 +1,8 @@
-package io.everyonecodes.w1springbeans.drhouseadmission.controllers;
+package crv.hospital.admissions.controllers;
 
-import io.everyonecodes.w1springbeans.drhouseadmission.model.UUIDProvider;
+
+import crv.hospital.admissions.model.UUIDProvider;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,20 +14,21 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/uuids")
 public class UUIDCacheEndpoint {
-
-    UUIDProvider uuidProvider;
+    //The ResponseEntity class allows to create responses with different HTTP status codes --> good practice in REST APIs.
+    private final UUIDProvider uuidProvider;
     public UUIDCacheEndpoint(UUIDProvider uuidProvider) {
         this.uuidProvider = uuidProvider;
     }
 
     @GetMapping
-    public Map<String, String> getCache() {
-        return uuidProvider.getCacheSnapshot();
+    public ResponseEntity<Map<String, String>> getCache() {
+        return ResponseEntity.ok(uuidProvider.getCacheSnapshot());
     }
 
     @GetMapping("/{patientName}")
-    public String getPatient(@PathVariable String patientName) {
-
-        return uuidProvider.findUUID(patientName);
+    public ResponseEntity<String> getPatient(@PathVariable String patientName) {
+        return uuidProvider.findUUID(patientName)
+                .map(uuid -> ResponseEntity.ok(uuid))  // If UUID found, return 200 OK with the UUID
+                .orElseGet(() -> ResponseEntity.notFound().build());  // If not found, return 404
     }
 }
