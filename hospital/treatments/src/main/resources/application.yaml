@@ -4,3 +4,5 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost/hospital-treatments
+hospital:
+  accountancy-url: "http://localhost:9004/patients"
